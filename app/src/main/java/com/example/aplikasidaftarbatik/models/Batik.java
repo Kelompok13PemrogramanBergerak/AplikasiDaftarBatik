@@ -1,4 +1,4 @@
-package com.example.aplikasidaftarbatik;
+package com.example.aplikasidaftarbatik.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

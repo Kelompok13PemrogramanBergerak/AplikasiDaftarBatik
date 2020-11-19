@@ -1,4 +1,4 @@
-package com.example.aplikasidaftarbatik;
+package com.example.aplikasidaftarbatik.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +12,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.aplikasidaftarbatik.models.Batik;
+import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
+import com.example.aplikasidaftarbatik.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
