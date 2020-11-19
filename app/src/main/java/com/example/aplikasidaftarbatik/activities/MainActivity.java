@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     List<Batik> dataBatik;
     BatikAdapter batikAdapter;
+    //tes commit
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
