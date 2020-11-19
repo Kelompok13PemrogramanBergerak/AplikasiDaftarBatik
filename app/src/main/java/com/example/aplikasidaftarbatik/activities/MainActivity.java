@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     List<Batik> dataBatik;
     BatikAdapter batikAdapter;
     //tes commit
+    // tes commit 2
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
