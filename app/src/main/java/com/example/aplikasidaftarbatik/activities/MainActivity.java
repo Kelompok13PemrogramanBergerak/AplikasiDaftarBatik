@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     List<Batik> dataBatik;
     BatikAdapter batikAdapter;
-
+//tes wendi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             if (response != null) {
                                 JSONArray jsonArray = response.getJSONArray("hasil");
-                                for (int i = 0; i < jsonArray.length(); i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     Batik item = new Batik(
                                             data.getInt("id"),
