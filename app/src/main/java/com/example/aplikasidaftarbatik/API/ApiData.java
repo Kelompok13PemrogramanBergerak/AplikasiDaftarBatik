@@ -15,9 +15,6 @@ import java.util.List;
 
 public class ApiData {
 
-
-
-
     BatikViewModel mBatikViewModel;
 
     public ApiData(BatikViewModel mBatikViewModel) {
