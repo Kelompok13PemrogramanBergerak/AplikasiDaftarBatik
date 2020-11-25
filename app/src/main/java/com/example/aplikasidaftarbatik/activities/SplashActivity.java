@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                //setelah loading maka akan langsung berpindah ke home activity
+                //setelah loading maka akan langsung berpindah ke main activity
                 Intent main = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(main);
                 finish();
