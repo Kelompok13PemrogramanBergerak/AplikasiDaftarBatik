@@ -1,33 +1,54 @@
 package com.example.aplikasidaftarbatik.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "batik_table")
 public class Batik {
 
     @SerializedName("id")
     @Expose
+    @PrimaryKey
+    @ColumnInfo(name = "id")
     private Integer id;
+
     @SerializedName("nama_batik")
     @Expose
+    @ColumnInfo(name = "nama_batik")
     private String namaBatik;
+
     @SerializedName("daerah_batik")
     @Expose
+    @ColumnInfo(name = "daerah_batik")
     private String daerahBatik;
+
     @SerializedName("makna_batik")
     @Expose
+    @ColumnInfo(name = "makna_batik")
     private String maknaBatik;
+
     @SerializedName("harga_rendah")
     @Expose
+    @ColumnInfo(name = "harga_rendah")
     private Integer hargaRendah;
+
     @SerializedName("harga_tinggi")
     @Expose
+    @ColumnInfo(name = "harga_tinggi")
     private Integer hargaTinggi;
+
     @SerializedName("hitung_view")
     @Expose
+    @ColumnInfo(name = "hitung_view")
     private Integer hitungView;
+
     @SerializedName("link_batik")
     @Expose
+    @ColumnInfo(name = "link_batik")
     private String linkBatik;
 
 
