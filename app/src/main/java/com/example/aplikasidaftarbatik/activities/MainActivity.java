@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     List<Batik> dataBatik;
     BatikAdapter batikAdapter;
 
+    //wendi
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
