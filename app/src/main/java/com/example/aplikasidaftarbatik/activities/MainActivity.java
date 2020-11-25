@@ -21,9 +21,11 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.aplikasidaftarbatik.API.ApiData;
 import com.example.aplikasidaftarbatik.models.Batik;
 import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
 import com.example.aplikasidaftarbatik.R;
+import com.example.aplikasidaftarbatik.utilities.CheckInternet;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -146,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
             apiData.getData();
         } else {
             Toast.makeText(MainActivity.this, "No Internet Connection ...", Toast.LENGTH_SHORT).show();
-
-
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }, 2000);
-
         }
     }
 
