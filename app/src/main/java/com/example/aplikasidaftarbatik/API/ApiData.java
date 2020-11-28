@@ -5,6 +5,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.aplikasidaftarbatik.models.Batik;
+import com.example.aplikasidaftarbatik.models.BatikSlide;
+import com.example.aplikasidaftarbatik.roomdatabase.BatikViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;

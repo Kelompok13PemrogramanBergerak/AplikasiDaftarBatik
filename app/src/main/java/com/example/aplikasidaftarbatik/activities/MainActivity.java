@@ -1,5 +1,15 @@
 package com.example.aplikasidaftarbatik.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
@@ -7,41 +17,30 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.aplikasidaftarbatik.API.ApiData;
 import com.example.aplikasidaftarbatik.models.Batik;
-import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
+import com.example.aplikasidaftarbatik.models.BatikSlide;
 import com.example.aplikasidaftarbatik.R;
+import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
+import com.example.aplikasidaftarbatik.adapters.BatikSliderAdapter;
+import com.example.aplikasidaftarbatik.roomdatabase.BatikViewModel;
 import com.example.aplikasidaftarbatik.utilities.CheckInternet;
+import com.example.aplikasidaftarbatik.utilities.HitungWaktuOut;
+import com.example.aplikasidaftarbatik.utilities.TimeAnimation;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //DataBatik
-    List<Batik> dataBatik;
-    List<BatikSlide> dataBatikPopular;
+    private static final String WAKTU_KELUAR = "waktu_keluar";
 
     //recyclerView
     BatikAdapter batikAdapter;
@@ -65,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
     CheckInternet checkInternet;
     ApiData apiData;
 
+    //Untuk menampilkan durasi keluar aplikasi
+    TextView textWaktu;
+    SimpleDateFormat dateFormat;
+    String ambilWaktuKeluar;
+    String ambilWaktuMasuk;
+
+    // Shared preferences object
+    private SharedPreferences mPreferences;
+
+    // Name of shared preferences file
+    private String sharedPrefFile =
+            "com.example.android.hellosharedprefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,29 +88,39 @@ public class MainActivity extends AppCompatActivity {
         labelNoInternet = findViewById(R.id.label_no_internet);
         refreshButton = findViewById(R.id.refresh_button);
         searchView = findViewById(R.id.kolomcari);
-        //        dataBatik = new ArrayList<>();
-//        dataBatikPopular = new ArrayList<>();
+        textWaktu = findViewById(R.id.label_waktu);
 
         //RecycleView Batik
-        batikAdapter = new BatikAdapter(this, dataBatik);
+        batikAdapter = new BatikAdapter(this);
         idRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         idRecyclerView.setAdapter(batikAdapter);
 
         //Slider Batik
-        SlideAdapter = new BatikSliderAdapter(this, dataBatikPopular);
+        SlideAdapter = new BatikSliderAdapter(this);
         sliderView.setSliderAdapter(SlideAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.startAutoCycle();
 
+        //Inisialisasi Fast Android Networking Library untuk panggil API
         AndroidNetworking.initialize(getApplicationContext());
+
+        //Check Internet
         checkInternet = new CheckInternet(getApplicationContext());
 
+        //inisialisasi untuk ambil waktu
+        dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 
+        //inisialisasi SharedPreferences
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+        //Inisialisasi view model
         mBatikViewModel = new ViewModelProvider(this).get(BatikViewModel.class);
+
+        //Inisialisasi API
         apiData = new ApiData(mBatikViewModel);
 
-
+        //Tombol Refresh
         refreshButton.setOnClickListener(view -> {
             hideRefresh();
             checkData();
@@ -107,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         //Periksa Data dari API
         checkData();
 
-
+        //Ambil data dari database untuk RecyclerView
         mBatikViewModel.getAllBatik().observe(this, new Observer<List<Batik>>() {
             @Override
             public void onChanged(List<Batik> batiks) {
@@ -115,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //Ambil data dari database untuk Image Slider
         mBatikViewModel.getAllBatikPopular().observe(this, new Observer<List<BatikSlide>>() {
             @Override
             public void onChanged(List<BatikSlide> batikSlides) {
@@ -124,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //set Pencarian
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -141,13 +164,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    //Periksa data di API
     public void checkData() {
         if (checkInternet.isConnected()) {
             Toast.makeText(MainActivity.this, "Sedang Memuat ...", Toast.LENGTH_SHORT).show();
-            apiData.getData();
+            //Beri waktu aplikasi membaca cache
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //jika tidak ada cache, maka ambil data dari internet
+                    if (batikAdapter.getItemCount() < 1) {
+                        apiData.getData();
+                    }
+                }
+            }, 2000);
+
         } else {
             Toast.makeText(MainActivity.this, "No Internet Connection ...", Toast.LENGTH_SHORT).show();
+            //Beri waktu aplikasi membaca cache
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -169,4 +203,40 @@ public class MainActivity extends AppCompatActivity {
         labelNoInternet.setVisibility(View.VISIBLE);
         refreshButton.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ambilWaktuKeluar = dateFormat.format(new Date());
+
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        preferencesEditor.putString(WAKTU_KELUAR, ambilWaktuKeluar);
+        preferencesEditor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ambilWaktuMasuk = dateFormat.format(new Date());
+        String waktuSebelumKeluar = mPreferences.getString(WAKTU_KELUAR,dateFormat.format(new Date()));
+
+        if (!ambilWaktuMasuk.equals(waktuSebelumKeluar)) {
+            try {
+                Date waktuKeluar = dateFormat.parse(waktuSebelumKeluar);
+                Date waktuMasuk = dateFormat.parse(ambilWaktuMasuk);
+
+                HitungWaktuOut hitungWaktuOut = new HitungWaktuOut(waktuKeluar, waktuMasuk);
+
+                if (!hitungWaktuOut.durasiKeluarAplikasi().equals("sebentar")) {
+                    textWaktu.setText("Selamat Datang Kembali, sudah " + hitungWaktuOut.durasiKeluarAplikasi() + " Anda Tidak Berkunjung");
+                    new TimeAnimation(textWaktu).displayAnimation();
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
