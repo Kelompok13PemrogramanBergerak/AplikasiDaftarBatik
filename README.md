@@ -1,4 +1,4 @@
-# AplikasiDaftarBatik
+# AplikasiDaftarBatik - Kelompok 13
 
 Aplikasi ini mempunyai tambahan fitur :
 
