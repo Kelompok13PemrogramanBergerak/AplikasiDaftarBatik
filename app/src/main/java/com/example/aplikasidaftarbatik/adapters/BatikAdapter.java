@@ -69,7 +69,7 @@ public class BatikAdapter extends RecyclerView.Adapter<BatikAdapter.BatikViewHol
             myNamaBatik = itemView.findViewById(R.id.namaBatik);
             myDaerahBatik= itemView.findViewById(R.id.daerahBatik);
             myInfoBatik = itemView.findViewById(R.id.infoBatik);
-            myImage = itemView.findViewById(R.id.gambarBatik);
+            myImage = itemView.findViewById(R.id.gambar);
 
             itemView.setOnClickListener(this);
 
