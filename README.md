@@ -1,6 +1,6 @@
 # AplikasiDaftarBatik - Kelompok 13
 
-Aplikasi ini mempunyai tambahan fitur :
+Aplikasi ini mempunyai fitur tambahan :
 
 * Image Slider
 * Pencarian batik
