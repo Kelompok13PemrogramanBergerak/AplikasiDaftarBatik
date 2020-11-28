@@ -70,10 +70,8 @@ public class MainActivity extends AppCompatActivity {
     String ambilWaktuKeluar;
     String ambilWaktuMasuk;
 
-    // Shared preferences object
     private SharedPreferences mPreferences;
 
-    // Name of shared preferences file
     private String sharedPrefFile =
             "com.example.android.hellosharedprefs";
 
@@ -168,10 +166,12 @@ public class MainActivity extends AppCompatActivity {
     public void checkData() {
         if (checkInternet.isConnected()) {
             Toast.makeText(MainActivity.this, "Sedang Memuat ...", Toast.LENGTH_SHORT).show();
+
             //Beri waktu aplikasi membaca cache
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
                     //jika tidak ada cache, maka ambil data dari internet
                     if (batikAdapter.getItemCount() < 1) {
                         apiData.getData();
@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             Toast.makeText(MainActivity.this, "No Internet Connection ...", Toast.LENGTH_SHORT).show();
+
             //Beri waktu aplikasi membaca cache
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
