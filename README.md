@@ -6,3 +6,5 @@ Aplikasi ini mempunyai tambahan fitur :
 2. memberitahu user sudah berapa lama user tidak menggunakan aplikasi batik ini, 
    pemberitahuan muncul setelah 10 menit keluar dari aplikasi
 3. Pencarian batik
+
+# GET
