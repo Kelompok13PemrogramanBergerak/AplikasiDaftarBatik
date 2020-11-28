@@ -26,9 +26,9 @@ public class HitungWaktuOut {
             hasilWaktu = "sebentar";
         } else if (diffSeconds >= 0 && diffMinutes >= 10 && diffHours == 0 && diffDays == 0) {
             hasilWaktu = diffMinutes + " menit " + diffSeconds + " detik";
-        } else if (diffSeconds >= 0 && diffMinutes >= 10 && diffHours > 0 && diffDays == 0) {
+        } else if (diffSeconds >= 0 && diffMinutes > 0 && diffHours > 0 && diffDays == 0) {
             hasilWaktu = diffHours + " jam " + diffMinutes + " menit";
-        } else if ( diffSeconds >= 0 && diffMinutes >= 10 && diffHours > 0 && diffDays > 0) {
+        } else if ( diffSeconds >= 0 && diffMinutes > 0 && diffHours > 0 && diffDays > 0) {
             hasilWaktu = diffDays + " hari " + diffHours + " jam";
         }
 
