@@ -7,4 +7,4 @@ Aplikasi ini mempunyai tambahan fitur :
    pemberitahuan muncul setelah 10 menit keluar dari aplikasi
 3. Pencarian batik
 
-# GET
+
