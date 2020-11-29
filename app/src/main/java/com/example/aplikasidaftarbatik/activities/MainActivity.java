@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         checkInternet = new CheckInternet(getApplicationContext());
 
         //inisialisasi untuk ambil waktu
-        dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("dd/M/yyyy HH:mm:ss" , Locale.getDefault());
 
         //inisialisasi SharedPreferences
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
@@ -228,9 +228,10 @@ public class MainActivity extends AppCompatActivity {
                 Date waktuMasuk = dateFormat.parse(ambilWaktuMasuk);
 
                 HitungWaktuOut hitungWaktuOut = new HitungWaktuOut(waktuKeluar, waktuMasuk);
+                String hasilWaktu = hitungWaktuOut.durasiKeluarAplikasi();
 
-                if (!hitungWaktuOut.durasiKeluarAplikasi().equals("sebentar")) {
-                    textWaktu.setText("Selamat Datang Kembali, sudah " + hitungWaktuOut.durasiKeluarAplikasi() + " Anda Tidak Berkunjung");
+                if (!hasilWaktu.equals("sebentar")) {
+                    textWaktu.setText("Selamat Datang Kembali, sudah " + hasilWaktu + " Anda Tidak Berkunjung");
                     new TimeAnimation(textWaktu).displayAnimation();
                 }
 

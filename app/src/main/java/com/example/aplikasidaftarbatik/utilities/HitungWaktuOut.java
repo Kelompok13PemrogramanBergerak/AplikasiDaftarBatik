@@ -1,5 +1,6 @@
 package com.example.aplikasidaftarbatik.utilities;
 
+import java.time.Duration;
 import java.util.Date;
 
 public class HitungWaktuOut {
@@ -13,23 +14,28 @@ public class HitungWaktuOut {
     }
 
     public String durasiKeluarAplikasi() {
-        long diff = waktuMasuk.getTime() - waktuKeluar.getTime();
+        Duration diff = Duration.between(waktuKeluar.toInstant(), waktuMasuk.toInstant());
 
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long days = diff.toDays();
+        diff = diff.minusDays(days);
+        long hours = diff.toHours();
+        diff = diff.minusHours(hours);
+        long minutes = diff.toMinutes();
+        diff = diff.minusMinutes(minutes);
+        long seconds = diff.getSeconds();
 
         String hasilWaktu = "";
 
-        if(diffSeconds >= 0 && diffMinutes < 10 && diffHours == 0 && diffDays == 0) {
+        if(seconds >= 0 && minutes < 10 && hours == 0 && days == 0) {
             hasilWaktu = "sebentar";
-        } else if (diffSeconds >= 0 && diffMinutes >= 10 && diffHours == 0 && diffDays == 0) {
-            hasilWaktu = diffMinutes + " menit " + diffSeconds + " detik";
-        } else if (diffSeconds >= 0 && diffMinutes > 0 && diffHours > 0 && diffDays == 0) {
-            hasilWaktu = diffHours + " jam " + diffMinutes + " menit";
-        } else if ( diffSeconds >= 0 && diffMinutes > 0 && diffHours > 0 && diffDays > 0) {
-            hasilWaktu = diffDays + " hari " + diffHours + " jam";
+        } else if (seconds >= 0 && minutes >= 10 && hours == 0 && days == 0) {
+            hasilWaktu = minutes + " menit " + seconds + " detik";
+        } else if (seconds >= 0 && minutes >= 0 && hours >= 0 && days == 0) {
+            hasilWaktu = hours + " jam " + minutes + " menit";
+        } else if ( seconds >= 0 && minutes >= 0 && hours >= 0 && days > 0) {
+            hasilWaktu = days + " hari " + hours + " jam";
+        } else {
+            hasilWaktu = "lama";
         }
 
         return hasilWaktu;
