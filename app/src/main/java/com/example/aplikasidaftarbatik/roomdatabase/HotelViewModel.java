@@ -26,7 +26,7 @@ public class HotelViewModel extends AndroidViewModel {
         return mAllHotel;
     }
 
-    public LiveData<List<Hotel>> getALlHotelSlide() {
+    public LiveData<List<Hotel>> getAllHotelSlide() {
         return mRepository.getAllHotelSlide();
     }
 

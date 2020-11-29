@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Ambil data dari database untuk Image Slider
-        mHotelViewModel.getALlHotelSlide().observe(this, new Observer<List<Hotel>>() {
+        mHotelViewModel.getAllHotelSlide().observe(this, new Observer<List<Hotel>>() {
             @Override
             public void onChanged(List<Hotel> hotels) {
                 SlideAdapter.setBatikList(hotels);
