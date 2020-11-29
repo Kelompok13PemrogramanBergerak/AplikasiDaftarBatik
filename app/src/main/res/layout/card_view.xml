@@ -28,7 +28,7 @@
             android:paddingEnd="16dp">
 
             <TextView
-                android:id="@+id/namaBatik"
+                android:id="@+id/namaHotel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
@@ -36,15 +36,15 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/daerahBatik"
+                android:id="@+id/nomorTelpon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Tempat"
+                android:text="123456789"
                 android:textColor="#232F34" />
 
             <TextView
-                android:id="@+id/infoBatik"
+                android:id="@+id/alamatHotel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/detail_gambar_batik"
+            android:id="@+id/detail_gambar_hotel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
@@ -17,38 +18,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/detail_gambar_batik"
+            android:layout_below="@id/detail_gambar_hotel"
             android:padding="16dp"
             android:orientation="vertical">
 
 
             <TextView
-                android:id="@+id/detail_nama_batik"
+                android:id="@+id/detail_nama_hotel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textStyle="bold"
-                tools:text="Nama Batik" />
+                tools:text="Nama Hotel" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
 
                 <TextView
-                    android:id="@+id/label_daerah_batik"
+                    android:id="@+id/detail_nomor_telepon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Asal Daerah : "
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-                <TextView
-                    android:id="@+id/detail_daerah_batik"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/label_daerah_batik"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    tools:text="Daerah batik" />
+                    tools:text="082211221122"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    app:drawableStartCompat="@drawable/ic_phone" />
+
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/label_alamat_hotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Alamat Hotel : "
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_alamat_hotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="jfdkhkdshfkjdshf" />
 
 
             <View
@@ -58,84 +74,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="?android:attr/listDivider" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Kisaran Harga"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textStyle="bold" />
-
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/label_detail_harga_rendah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="5dp"
-                    android:text="Harga Terendah" />
-
-
-                <TextView
-                    android:id="@+id/label_detail_harga_tinggi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="5dp"
-                    android:text="Harga Tertinggi" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:background="@drawable/gradient_harga">
-
-                <TextView
-                    android:id="@+id/detail_harga_rendah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    tools:text="10000" />
-
-                <TextView
-                    android:id="@+id/detail_harga_tinggi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    tools:text="100000" />
-
-            </FrameLayout>
-
-
-            <TextView
-                android:id="@+id/label_detail_makna_batik"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:text="Deskripsi Batik : "
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-
-            <TextView
-                android:id="@+id/detail_makna_batik"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                tools:text="jfdkhkdshfkjdshf" />
 
         </LinearLayout>
 

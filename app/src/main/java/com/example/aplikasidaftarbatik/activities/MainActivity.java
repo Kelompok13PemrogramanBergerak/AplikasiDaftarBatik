@@ -19,12 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.example.aplikasidaftarbatik.API.ApiData;
-import com.example.aplikasidaftarbatik.models.Batik;
-import com.example.aplikasidaftarbatik.models.BatikSlide;
 import com.example.aplikasidaftarbatik.R;
-import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
-import com.example.aplikasidaftarbatik.adapters.BatikSliderAdapter;
-import com.example.aplikasidaftarbatik.roomdatabase.BatikViewModel;
+import com.example.aplikasidaftarbatik.adapters.HotelAdapter;
+import com.example.aplikasidaftarbatik.adapters.HotelSliderAdapter;
+import com.example.aplikasidaftarbatik.models.Hotel;
+import com.example.aplikasidaftarbatik.roomdatabase.HotelViewModel;
 import com.example.aplikasidaftarbatik.utilities.CheckInternet;
 import com.example.aplikasidaftarbatik.utilities.HitungWaktuOut;
 import com.example.aplikasidaftarbatik.utilities.TimeAnimation;
@@ -43,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String WAKTU_KELUAR = "waktu_keluar";
 
     //recyclerView
-    BatikAdapter batikAdapter;
+    HotelAdapter hotelAdapter;
     RecyclerView idRecyclerView;
 
     //Slider layout
     SliderView sliderView;
-    BatikSliderAdapter SlideAdapter;
+    HotelSliderAdapter SlideAdapter;
 
     // Refresh layout
     TextView labelNoInternet;
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
 
     //ViewModel
-    BatikViewModel mBatikViewModel;
+    HotelViewModel mHotelViewModel;
 
     //InternetConnection
     CheckInternet checkInternet;
@@ -89,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
         textWaktu = findViewById(R.id.label_waktu);
 
         //RecycleView Batik
-        batikAdapter = new BatikAdapter(this);
+        hotelAdapter = new HotelAdapter(this);
         idRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        idRecyclerView.setAdapter(batikAdapter);
+        idRecyclerView.setAdapter(hotelAdapter);
 
         //Slider Batik
-        SlideAdapter = new BatikSliderAdapter(this);
+        SlideAdapter = new HotelSliderAdapter(this);
         sliderView.setSliderAdapter(SlideAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -113,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
         //Inisialisasi view model
-        mBatikViewModel = new ViewModelProvider(this).get(BatikViewModel.class);
+        mHotelViewModel = new ViewModelProvider(this).get(HotelViewModel.class);
 
         //Inisialisasi API
-        apiData = new ApiData(mBatikViewModel);
+        apiData = new ApiData(mHotelViewModel);
 
         //Tombol Refresh
         refreshButton.setOnClickListener(view -> {
@@ -128,18 +127,18 @@ public class MainActivity extends AppCompatActivity {
         checkData();
 
         //Ambil data dari database untuk RecyclerView
-        mBatikViewModel.getAllBatik().observe(this, new Observer<List<Batik>>() {
+        mHotelViewModel.getAllHotel().observe(this, new Observer<List<Hotel>>() {
             @Override
-            public void onChanged(List<Batik> batiks) {
-                batikAdapter.setBatikList(batiks);
+            public void onChanged(List<Hotel> hotels) {
+                hotelAdapter.setBatikList(hotels);
             }
         });
 
         //Ambil data dari database untuk Image Slider
-        mBatikViewModel.getAllBatikPopular().observe(this, new Observer<List<BatikSlide>>() {
+        mHotelViewModel.getALlHotelSlide().observe(this, new Observer<List<Hotel>>() {
             @Override
-            public void onChanged(List<BatikSlide> batikSlides) {
-                SlideAdapter.setBatikList(batikSlides);
+            public void onChanged(List<Hotel> hotels) {
+                SlideAdapter.setBatikList(hotels);
             }
         });
 
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
 
                     //jika tidak ada cache, maka ambil data dari internet
-                    if (batikAdapter.getItemCount() < 1) {
+                    if (hotelAdapter.getItemCount() < 1) {
                         apiData.getData();
                     }
                 }
@@ -186,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (batikAdapter.getItemCount() < 1) {
+                    if (hotelAdapter.getItemCount() < 1) {
                         displayRefresh();
                     }
                 }
