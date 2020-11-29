@@ -70,10 +70,8 @@ public class MainActivity extends AppCompatActivity {
     String ambilWaktuKeluar;
     String ambilWaktuMasuk;
 
-    // Shared preferences object
     private SharedPreferences mPreferences;
 
-    // Name of shared preferences file
     private String sharedPrefFile =
             "com.example.android.hellosharedprefs";
 
