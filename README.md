@@ -10,4 +10,6 @@ Aplikasi ini mempunyai fitur tambahan :
 Contoh preview :<br />
 "Selamat Datang Kembali, sudah 20 menit Anda tidak berkunjung"
 
+Minimum SDK version : 26
+
 
