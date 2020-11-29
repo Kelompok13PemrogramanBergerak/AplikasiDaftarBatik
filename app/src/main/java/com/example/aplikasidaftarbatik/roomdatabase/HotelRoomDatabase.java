@@ -8,31 +8,31 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.aplikasidaftarbatik.models.Batik;
-import com.example.aplikasidaftarbatik.models.BatikSlide;
+import com.example.aplikasidaftarbatik.models.Hotel;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Batik.class, BatikSlide.class}, version = 1, exportSchema = false)
-public abstract class BatikRoomDatabase extends RoomDatabase {
+@Database(entities = {Hotel.class}, version = 3, exportSchema = false)
+public abstract class HotelRoomDatabase extends RoomDatabase {
 
 
-    public abstract BatikDao batikDao();
+    public abstract HotelDao hotelDao();
 
-    private static volatile BatikRoomDatabase INSTANCE;
+    private static volatile HotelRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
-    public static BatikRoomDatabase getDatabase(Context context) {
+    public static HotelRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
-            synchronized (BatikRoomDatabase.class) {
+            synchronized (HotelRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            BatikRoomDatabase.class, "batik_database")
+                            HotelRoomDatabase.class, "batik_database")
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -52,17 +52,10 @@ public abstract class BatikRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                BatikDao dao = INSTANCE.batikDao();
-                dao.deleteAll();
-                dao.deleteAllPopular();
-
+                HotelDao dao = INSTANCE.hotelDao();
+                dao.deleteAllHotel();
 
             });
         }
     };
-
-
-
-
-
 }

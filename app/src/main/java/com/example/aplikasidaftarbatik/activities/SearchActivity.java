@@ -11,23 +11,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplikasidaftarbatik.R;
-import com.example.aplikasidaftarbatik.adapters.BatikAdapter;
-import com.example.aplikasidaftarbatik.models.Batik;
-import com.example.aplikasidaftarbatik.roomdatabase.BatikViewModel;
+import com.example.aplikasidaftarbatik.adapters.HotelAdapter;
+import com.example.aplikasidaftarbatik.models.Hotel;
+import com.example.aplikasidaftarbatik.roomdatabase.HotelViewModel;
 
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-
     TextView infoSearch;
     RecyclerView searchRecycler;
     SearchView searchButton;
 
+    HotelAdapter searchAdapter;
 
-    BatikAdapter searchAdapter;
-
-    BatikViewModel mBatikViewModel;
+    HotelViewModel mHotelViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +37,11 @@ public class SearchActivity extends AppCompatActivity {
         searchRecycler = findViewById(R.id.searchRecyclerView);
         searchButton = findViewById(R.id.kolomcari);
 
-
-
-        searchAdapter = new BatikAdapter(this);
+        searchAdapter = new HotelAdapter(this);
         searchRecycler.setAdapter(searchAdapter);
         searchRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        mBatikViewModel = new ViewModelProvider(this).get(BatikViewModel.class);
+        mHotelViewModel = new ViewModelProvider(this).get(HotelViewModel.class);
 
 
         String mainInput = getIntent().getStringExtra("query_search");
@@ -55,26 +51,26 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                doSearchBatik(query);
+                doSearchHotel(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                doSearchBatik(newText);
+                doSearchHotel(newText);
                 return false;
             }
 
-            private void doSearchBatik(String inputData) {
+            private void doSearchHotel(String inputData) {
 
-                mBatikViewModel.searchBatik(inputData).observe(SearchActivity.this, new Observer<List<Batik>>() {
+                mHotelViewModel.searchHotel(inputData).observe(SearchActivity.this, new Observer<List<Hotel>>() {
                     @Override
-                    public void onChanged(List<Batik> batiks) {
-                        if (batiks.size() > 0) {
-                            searchAdapter.setBatikList(batiks);
+                    public void onChanged(List<Hotel> hotels) {
+                        if (hotels.size() > 0) {
+                            searchAdapter.setBatikList(hotels);
                             infoSearch.setText("Menampilkan hasil pencarian " + inputData);
                         } else {
-                            searchAdapter.setBatikList(batiks);
+                            searchAdapter.setBatikList(hotels);
                             infoSearch.setText("Tidak menemukan hasil pencarian " + inputData);
                         }
                     }

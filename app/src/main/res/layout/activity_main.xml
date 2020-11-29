@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Daftar Batik"
+                    android:text="Daftar Hotel"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textStyle="bold" />
 

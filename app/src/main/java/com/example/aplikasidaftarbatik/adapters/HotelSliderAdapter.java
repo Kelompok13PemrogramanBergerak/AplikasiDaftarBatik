@@ -9,23 +9,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplikasidaftarbatik.R;
-import com.example.aplikasidaftarbatik.models.BatikSlide;
+import com.example.aplikasidaftarbatik.models.Hotel;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BatikSliderAdapter extends SliderViewAdapter<BatikSliderAdapter.SliderAdapterVH> {
+public class HotelSliderAdapter extends SliderViewAdapter<HotelSliderAdapter.SliderAdapterVH> {
 
     private Context context;
-    private List<BatikSlide> batikSlides = new ArrayList<>();
+    private List<Hotel> hotelSlides = new ArrayList<>();
 
-    public BatikSliderAdapter(Context context) {
+    public HotelSliderAdapter(Context context) {
         this.context = context;
     }
 
-    public void setBatikList(List<BatikSlide> batikslides) {
-        this.batikSlides = batikslides;
+    public void setBatikList(List<Hotel> hotelSlides) {
+        this.hotelSlides = hotelSlides;
         notifyDataSetChanged();
     }
 
@@ -38,12 +38,12 @@ public class BatikSliderAdapter extends SliderViewAdapter<BatikSliderAdapter.Sli
 
     @Override
     public void onBindViewHolder(SliderAdapterVH viewHolder, int position) {
-        BatikSlide sliderItem = batikSlides.get(position);
+        Hotel sliderItem = hotelSlides.get(position);
 
-        viewHolder.batikDescription.setText(sliderItem.getNamaBatik());
+        viewHolder.batikDescription.setText(sliderItem.getNama());
 
         Glide.with(viewHolder.itemView)
-                .load(sliderItem.getLinkBatik())
+                .load(sliderItem.getGambar_url())
                 .skipMemoryCache(true)
                 .placeholder(R.drawable.bg_overlay)
                 .fitCenter()
@@ -53,8 +53,8 @@ public class BatikSliderAdapter extends SliderViewAdapter<BatikSliderAdapter.Sli
     @Override
     public int getCount() {
 
-        if (this.batikSlides != null) {
-            return batikSlides.size();
+        if (this.hotelSlides != null) {
+            return hotelSlides.size();
         }
         return 0;
 
