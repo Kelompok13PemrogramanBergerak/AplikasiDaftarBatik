@@ -1,11 +1,12 @@
-# AplikasiDaftarBatik - Kelompok 13
+# AplikasiDaftarHotel - Kelompok 13
 
-## Berubah Ke Aplikasi Daftar Hotel
+## sebelumnya Aplikasi Daftar Batik, tapi API batik error
 
 Aplikasi ini mempunyai fitur tambahan :
 
 * Image Slider
 * Pencarian Hotel
+* Google Maps berdasarkan coordinate
 * memberitahu user sudah berapa lama user tidak menggunakan aplikasi hotel ini,<br /> 
    pemberitahuan muncul setelah 10 menit keluar dari aplikasi, <br />
    bentuk pemberitahuan seperti TOAST.<br />
