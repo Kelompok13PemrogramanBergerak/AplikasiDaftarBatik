@@ -20,7 +20,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/custom_search"
             app:iconifiedByDefault="false"
-            app:queryHint="Cari Batik ..." />
+            app:queryHint="Cari Hotel ..." />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
