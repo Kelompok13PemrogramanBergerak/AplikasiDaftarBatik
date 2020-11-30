@@ -14,7 +14,7 @@
         android:background="@drawable/custom_search"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Cari Batik ..." />
+        app:queryHint="Cari Hotel ..." />
 
     <TextView
         android:id="@+id/label_info_search"
