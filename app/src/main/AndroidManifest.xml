@@ -13,6 +13,14 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCyBot2xmixeT3vvSerWD3pyLJ6D2IsJ8s"/>
+
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.SplashActivity" android:theme="@style/SplashTheme">
